@@ -1,4 +1,9 @@
 /* Normalise css */
+
+.hello{
+    display: none;
+}
+
 html,body{
     background-color: #141414;
     padding:0;

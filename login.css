@@ -1,0 +1,44 @@
+body {
+    background-color: #155799;
+    color: whitesmoke;
+    font-family: Arial;
+  }
+  #input{
+margin-top: 1rem;
+  }
+  .container {
+    width: 400px;
+    margin: 0 auto;
+  }
+  
+  .header {
+    text-align: center;
+  }
+  
+  .login-form {
+    margin-top: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 24px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  button {
+    background-color: #000;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #ccc;
+  }
