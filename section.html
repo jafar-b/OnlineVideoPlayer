@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Grid</title>
+    <style>
+        .movie-overview{
+            color: white;
+        }
+        .container,*{
+            font-family:Helvetica,Arial ,sans-serif;
+            background: #000;
+      
+        }
+        /* Your CSS styles for the grid items here */
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            
+        }
+
+        .movie-item {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .movie-title {
+            font-weight: bold;
+            color: white;
+        }
+
+        .movie-poster {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="movie-grid" id="movieGrid"></div>
+        
+        </div>
+        <script>
+        const apikey = "97037c13cb583df804d4f91dbe9c6385";
+        const apiEndpoint = "https://api.themoviedb.org/3";
+        const imgPath = "https://image.tmdb.org/t/p/original";
+        const genreId = 28; // Replace with the desired genre ID
+
+        const movieGrid = document.getElementById("movieGrid");
+
+        // Function to fetch movies based on genre
+        async function fetchMoviesByGenre() {
+            try {
+                const response = await fetch(`${apiEndpoint}/discover/movie?api_key=${apikey}&with_genres=${genreId}`);
+                const data = await response.json();
+
+                if (data.results && data.results.length > 0) {
+                    data.results.forEach((movie) => {
+                        const movieItem = document.createElement("div");
+                        movieItem.classList.add("movie-item");
+
+                        const posterUrl = `${imgPath}${movie.poster_path}`;
+
+                        movieItem.innerHTML = `
+                            <img class="movie-poster" src="${posterUrl}" alt="${movie.title}" />
+                            <p class="movie-title">${movie.title}</p>
+                            <p class="movie-overview">${movie.overview}</p>
+                        `;
+
+                        movieGrid.appendChild(movieItem);
+                    });
+                } else {
+                    movieGrid.innerHTML = "<p>No movies found for this genre.</p>";
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        }
+
+        // Call the function to fetch and display movies
+        fetchMoviesByGenre();
+    </script>
+</body>
+</html>
